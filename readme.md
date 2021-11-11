@@ -1,6 +1,7 @@
 # FaithlifeOAuth-Mobile
 
 [![Build](https://github.com/Faithlife/FaithlifeOAuth-Mobile/workflows/build/badge.svg)](https://github.com/Faithlife/FaithlifeOAuth-Mobile/actions?query=workflow%3Abuild)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.faithlife/faithlife-oauth-android/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.faithlife/faithlife-oauth-android)
 
 Generates OAuth 1.0 signatures for web service requests on iOS and Android.
 
