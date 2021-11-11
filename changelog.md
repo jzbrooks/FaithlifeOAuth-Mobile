@@ -3,6 +3,9 @@
 # FacilityOAuth-Mobile Changelog
 
 ## [Unreleased]
+### Fixed
+- Attaching artifacts to GitHub releases
+
 ## [0.0.1]
 ### Added
 - Plaintext & HMAC-SHA1 OAuth1 authorization header value generation
