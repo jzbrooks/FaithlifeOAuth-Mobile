@@ -55,7 +55,7 @@ jobs:
             - name: Upload Release Asset
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh release upload ${{ github.event.release.tag_name }} ./build/outputs/aar/faithlife-oauth-release.aar#faithlife-oauth.aar ./build/XCFrameworks/release/FaithlifeOAuth.xcframework.zip
+              run: gh release upload ${{ github.event.release.tag_name }} ./build/XCFrameworks/release/FaithlifeOAuth.xcframework.zip
 
             # Create pull request
             - name: Create Pull Request

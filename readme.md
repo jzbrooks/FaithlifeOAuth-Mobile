@@ -11,6 +11,8 @@ Generates OAuth 1.0 signatures for web service requests on iOS and Android.
 
 #### Android
 
+Download [the latest AAR](https://search.maven.org/remote_content?g=com.faithlife&a=faithlife-oauth-android&v=LATEST) or download
+
 via Maven:
 
 ```xml
@@ -24,7 +26,7 @@ via Maven:
 via Gradle:
 
 ```kotlin
-implementation("com.faithlife:android-lint:$version")
+implementation("com.faithlife:faithlife-oauth-android:$version")
 ```
 #### iOS
 
