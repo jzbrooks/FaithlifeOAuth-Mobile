@@ -59,7 +59,7 @@ sealed class AuthorizationHeaderValue {
             user: OAuthCredentials?,
         ) : this(httpMethod, uri, nonce, Clock.System.now(), consumer, user)
 
-        internal constructor(
+        constructor(
             httpMethod: String,
             uri: Uri,
             nonce: String,
