@@ -89,11 +89,11 @@ sealed class AuthorizationHeaderValue {
         const val PLAINTEXT_METHOD = "PLAINTEXT"
         const val HMAC_SHA1_METHOD = "HMAC-SHA1"
 
-        val UNRESERVED_PUNCTUATION = setOf(
-            0x2D.toByte(), // -
-            0x2E.toByte(), // .
-            0x5F.toByte(), // _
-            0x73.toByte(), // ~
+        val UNRESERVED_PUNCTUATION = setOf<Byte>(
+            0x2D, // -
+            0x2E, // .
+            0x5F, // _
+            0x73, // ~
         )
 
         val Byte.isUnreserved: Boolean
@@ -124,8 +124,12 @@ sealed class AuthorizationHeaderValue {
             return parameters
         }
 
-        fun createPlaintextSignature(consumerSecret: String, accessSecret: String?): String {
-            return "$consumerSecret&${accessSecret ?: ""}"
+        fun createPlaintextSignature(consumerSecret: String, accessSecret: String?) = buildString {
+            append(consumerSecret)
+            append('&')
+            if (accessSecret != null) {
+                append(accessSecret)
+            }
         }
 
         private fun createHmacHeaderValue(
@@ -207,13 +211,12 @@ sealed class AuthorizationHeaderValue {
 
             val normalizedParameters = allParameters.asSequence()
                 .sortedBy(Map.Entry<String, List<String>>::key)
-                .map { (key, value) ->
+                .joinToString(separator = "&") { (key, value) ->
                     value.asSequence()
                         .map(::percentEncode)
                         .sorted()
                         .joinToString(separator = "&") { paramValue -> "$key=$paramValue" }
                 }
-                .joinToString(separator = "&")
 
             val normalizedUriBase = "${uri.scheme}://${uri.authority}${uri.path}"
             val signatureInput = httpMethod.uppercase() +
@@ -231,8 +234,9 @@ sealed class AuthorizationHeaderValue {
         fun formatOAuthProperties(properties: Map<String, List<String>>): String {
             val formattedProperties = properties.asSequence()
                 .filter { it.key.startsWith(PARAMETER_PREFIX) }
-                .map { (key, value) -> "$key=\"${percentEncode(value.single())}\"" }
-                .joinToString(separator = ",")
+                .joinToString(separator = ",") { (key, value) ->
+                    "$key=\"${percentEncode(value.single())}\""
+                }
 
             return "$HEADER_PREFIX $formattedProperties"
         }
