@@ -1,0 +1,27 @@
+// swift-tools-version:5.5
+import PackageDescription
+
+let packageVerson = "$PACKAGE_VERSION"
+let packageBinaryChecksum = "$PACKAGE_CHECKSUM"
+
+let packageName = "FaithlifeOAuth"
+let packageDownloadBaseUrl = "https://github.com/Faithlife/FaithlifeOAuth-Mobile/releases/download"
+let packageBinaryZipName = "\(packageName).xcframework.zip"
+let packageBinaryUrl = "\(packageDownloadBaseUrl)/\(packageVerson)/\(packageBinaryZipName)"
+
+let package = Package(
+	name: packageName,
+	platforms: [
+		.iOS(.v13),
+	],
+	products: [
+		.library(name: "FaithlifeOAuth", targets: ["FaithlifeOAuth"]),
+	],
+	targets: [
+		.binaryTarget(
+			name: packageName,
+			url: packageBinaryUrl,
+			checksum: packageBinaryChecksum
+		),
+	]
+)

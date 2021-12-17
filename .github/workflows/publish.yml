@@ -51,6 +51,20 @@ jobs:
                 zip -r FaithlifeOAuth.xcframework.zip FaithlifeOAuth.xcframework
                 popd
 
+            # Prepare Swift Package Manager
+            - name: Fixup Swift Package settings
+              run: |
+                export PACKAGE_CHECKSUM=$(swift package compute-checksum ./build/XCFrameworks/release/FaithlifeOAuth.xcframework.zip)
+                export PACKAGE_VERSION="${{ github.event.release.tag_name }}"
+                envsubst < Package.swift.template > Package.swift
+
+            - name: Commit Swift Package changes
+              uses: EndBug/add-and-commit@v7
+              with:
+                message: 'update Swift package checksum'
+                add: 'Package.swift'
+                tag: '${{ github.event.release.tag_name }} --force'
+
             # Upload artifact as a release asset
             - name: Upload Release Asset
               env:
