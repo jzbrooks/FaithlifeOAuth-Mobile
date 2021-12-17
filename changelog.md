@@ -4,14 +4,7 @@
 
 ## [Unreleased]
 ### Added
-
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
+- Preliminary Swift Package Manager support
 
 ### Security
 
