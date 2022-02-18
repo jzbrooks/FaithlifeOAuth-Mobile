@@ -183,6 +183,28 @@ class AuthorizationHeaderValueTest {
     }
 
     @Test
+    fun `bytes are not represented as signed in percent encoding`() {
+        // The text reaction byte values all wrap to negative representations in signed bytes
+        val header = buildTestUserHmacAuthorization(
+            Uri.parse(
+                "https://faithlife.com/v1/" +
+                    "conversations/1/messages/15/reactions?textReaction=%F0%9F%8C%9F"
+            ),
+        )
+
+        assertThat(header).hasToString(
+            """OAuth oauth_version="1.0",
+                |oauth_signature_method="HMAC-SHA1",
+                |oauth_consumer_key="984A8D4CEDCB7BC3B61119B234FF6",
+                |oauth_nonce="TestNonce",
+                |oauth_timestamp="${testTimestamp.epochSeconds}",
+                |oauth_token="5B282E3EC82C47A4B92F58112B1CD",
+                |oauth_signature="CsRqEQfx87Zmj7b3yH0ekQd4VBA%3D""""
+                .trimMargin().replace("\n", "")
+        )
+    }
+
+    @Test
     fun `trailing path slashes produce correct header`() {
         val header = buildTestUserHmacAuthorization(
             Uri.parse("https://faithlife.com/v1/"),

@@ -3,14 +3,14 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     kotlin("multiplatform") version "1.6.10"
-    id("org.jetbrains.changelog") version "1.3.0"
+    id("org.jetbrains.changelog") version "1.3.1"
     id("com.vanniktech.maven.publish") version "0.18.0"
-    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.1"
     id("com.android.library")
 }
 
 group = "com.faithlife"
-version = "0.0.3"
+version = "0.0.4"
 
 repositories {
     google()

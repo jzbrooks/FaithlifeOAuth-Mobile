@@ -260,11 +260,12 @@ sealed class AuthorizationHeaderValue {
                         // e.g. %3A
                         append('%')
 
-                        if (byte < 16) {
+                        val unsigned = byte.toUByte()
+                        if (unsigned < 16u) {
                             append('0')
                         }
 
-                        append(byte.toString(16).uppercase())
+                        append(unsigned.toString(16).uppercase())
                     }
                 }
             }

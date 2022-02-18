@@ -3,6 +3,10 @@
 # FacilityOAuth-Mobile Changelog
 
 ## [Unreleased]
+### Fixed
+- Bytes are represented as signed during percent encoding
+
+## [0.0.3]
 ### Added
 - Preliminary Swift Package Manager support
 
